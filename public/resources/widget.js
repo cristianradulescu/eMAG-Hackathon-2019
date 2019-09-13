@@ -1406,8 +1406,6 @@
         mobileHeight: "100%",
         mobileWidth: "300px",
         videoHeight: 160,
-        aboutLink: "https://botman.io",
-        aboutText: "⚡ Powered by BotMan",
         chatId: "",
         userId: "",
         alwaysUseFloatingButton: !1
