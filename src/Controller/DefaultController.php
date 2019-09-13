@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\OnboardingConversation;
 
 class DefaultController extends AbstractController
 {
@@ -64,7 +65,7 @@ class DefaultController extends AbstractController
         }
 
         $botman->fallback(function(Botman $bot) {
-            $bot->reply($bot->getMessage()->getExtras()['apiReply']);
+            $bot->startConversation(new OnboardingConversation);
         });
 
         $botman->listen();
