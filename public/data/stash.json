@@ -1,0 +1,17 @@
+{
+  "date": "2019-09-13",
+  "items": [
+    {
+      "name": "ABC-2300 Remove deprecated API method"
+    },
+    {
+      "name": "ABC-2400 Add 'is_test' column to Sheet entity and implement logic to hide test sheets from interface listing"
+    },
+    {
+      "name": "ABC-2400 Remove setter for Sheet test property since it is not necessary"
+    },
+    {
+      "name": "ABC-2400 Update failing unit tests for SheetService"
+    }
+  ]
+}

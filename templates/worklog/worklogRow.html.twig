@@ -1,0 +1,8 @@
+{% for worklogData in worklog.items %}
+    <tr>
+        <td>{{ worklogData.taskType }}</td>
+        <td>{{ worklogData.name }}</td>
+        <td data-duration-seconds="{{ worklogData.duration }}">{{ worklogData.durationFormatted }}</td>
+        <td>{{ worklogData.content }}</td>
+    </tr>
+{% endfor %}

@@ -1,0 +1,17 @@
+{
+  "date": "2019-09-13",
+  "items": [
+    {
+      "name": "Meetings - Sprint 123",
+      "duration": "900",
+      "content": "Daily scrum meeting",
+      "task_type": "Meeting task"
+    },
+    {
+      "name": "Delete deprecated API endpoint: Code review",
+      "duration": "1800",
+      "content": "",
+      "task_type": "Code review task"
+    }
+  ]
+}

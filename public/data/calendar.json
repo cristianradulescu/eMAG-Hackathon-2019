@@ -1,0 +1,15 @@
+{
+  "date": "2019-09-13",
+  "items": [
+    {
+      "name": "Daily scrum",
+      "start": "09:30",
+      "end": "09:45"
+    },
+    {
+      "name": "Project status meeting",
+      "start": "14:00",
+      "end": "15:00"
+    }
+  ]
+}
