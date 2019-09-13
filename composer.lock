@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce1c3af551f1271bf7d31f964aca169e",
+    "content-hash": "7e4033a8e536f6e6416175534e75649c",
     "packages": [
         {
             "name": "botman/botman",

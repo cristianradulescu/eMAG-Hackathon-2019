@@ -1,4 +1,7 @@
 {
+    "botman/botman": {
+        "version": "2.5.0"
+    },
     "botman/driver-web": {
         "version": "1.5.1"
     },
@@ -93,17 +96,26 @@
             "config/packages/dev/easy_log_handler.yaml"
         ]
     },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "monolog/monolog": {
         "version": "1.25.1"
     },
+    "mpociot/pipeline": {
+        "version": "1.0.2"
+    },
     "ocramius/package-versions": {
         "version": "1.4.0"
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "opis/closure": {
+        "version": "3.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -113,6 +125,27 @@
     },
     "psr/log": {
         "version": "1.1.0"
+    },
+    "react/cache": {
+        "version": "v1.0.0"
+    },
+    "react/dns": {
+        "version": "v1.2.0"
+    },
+    "react/event-loop": {
+        "version": "v1.1.0"
+    },
+    "react/promise": {
+        "version": "v2.7.1"
+    },
+    "react/promise-timer": {
+        "version": "v1.5.1"
+    },
+    "react/socket": {
+        "version": "v1.3.0"
+    },
+    "react/stream": {
+        "version": "v1.1.0"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -125,6 +158,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "spatie/macroable": {
+        "version": "1.0.0"
     },
     "symfony/cache": {
         "version": "v4.3.4"
@@ -337,6 +373,9 @@
     },
     "symfony/yaml": {
         "version": "v4.3.4"
+    },
+    "tightenco/collect": {
+        "version": "v5.8.34"
     },
     "twig/twig": {
         "version": "v2.11.3"
