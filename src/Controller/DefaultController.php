@@ -11,10 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\OnboardingConversation;
 
 class DefaultController extends AbstractController
 {
+    private $intentCategories = [
+        "hr",
+        "finance"
+    ];
+
     /**
      * @Route("/", name="homepage")
      */
@@ -47,15 +51,17 @@ class DefaultController extends AbstractController
         $dialogflow = ApiAi::create($_ENV['DIALOGFLOW_TOKEN'])->listenForAction();
 
         $botman->middleware->received($dialogflow);
-        
-        $botman->hears('hr', function (BotMan $bot) {
-            $extras = $bot->getMessage()->getExtras();
-            $apiReply = $extras['apiReply'];
-            $apiAction = $extras['apiAction'];
-            $apiIntent = $extras['apiIntent'];
 
-            $bot->reply($apiReply);
-        })->middleware($dialogflow);
+        foreach ($this->intentCategories as $intentCategoryName){
+            $botman->hears($intentCategoryName, function (BotMan $bot) {
+                $extras = $bot->getMessage()->getExtras();
+                $apiReply = $extras['apiReply'];
+//                $apiAction = $extras['apiAction'];
+//                $apiIntent = $extras['apiIntent'];
+
+                $bot->reply($apiReply);
+            })->middleware($dialogflow);
+        }
 
         $botman->fallback(function(Botman $bot) {
             $bot->reply($bot->getMessage()->getExtras()['apiReply']);
