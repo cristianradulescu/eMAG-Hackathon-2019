@@ -58,7 +58,7 @@ class DefaultController extends AbstractController
         })->middleware($dialogflow);
 
         $botman->fallback(function(Botman $bot) {
-            $bot->reply('Hmm let me think about.....');
+            $bot->reply($bot->getMessage()->getExtras()['apiReply']);
         });
 
         $botman->listen();
