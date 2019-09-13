@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
 class OnboardingConversation extends Conversation
@@ -15,8 +16,6 @@ class OnboardingConversation extends Conversation
                 $this->say('You access MyStaff portal, go to Create Request and then to Personnel - Change General Information. You can access MyStaff portal from InsideMAG - My resources - My holidays & payslips.');
             }
         });
-
-
     }
 
     public function run()

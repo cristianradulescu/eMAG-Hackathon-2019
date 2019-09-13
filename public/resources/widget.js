@@ -1390,7 +1390,7 @@
         frameEndpoint: "/botman/chat",
         timeFormat: "HH:MM",
         dateTimeFormat: "m/d/yy HH:MM",
-        title: "BotMan Widget",
+        title: "I.N.A",
         cookieValidInDays: 1,
         introMessage: "",
         placeholderText: "Send a message...",
