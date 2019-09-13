@@ -1,5 +1,5 @@
 {% for worklogData in worklog.items %}
-    <tr>
+    <tr class="alert {% if worklogData.duration is not null %}alert-success{% endif %}">
         <td>{{ worklogData.taskType }}</td>
         <td>{{ worklogData.name }}</td>
         <td data-duration-seconds="{{ worklogData.duration }}">{{ worklogData.durationFormatted }}</td>

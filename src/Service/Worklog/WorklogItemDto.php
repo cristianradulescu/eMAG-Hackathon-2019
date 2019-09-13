@@ -9,4 +9,5 @@ class WorklogItemDto
     public $durationFormatted;
     public $content;
     public $taskType;
+    public $taskId;
 }
