@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Cache\SymfonyCache;
 use BotMan\BotMan\Drivers\DriverManager;
+use BotMan\BotMan\Middleware\ApiAi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,8 +36,21 @@ class DefaultController extends AbstractController
 
         $botman = BotManFactory::create($config, new SymfonyCache($adapter));
 
-        $botman->hears('Hello', function($bot) {
-            $bot->startConversation(new OnboardingConversation);
+        $dialogflow = ApiAi::create($_ENV['DIALOGFLOW_TOKEN'])->listenForAction();
+
+        $botman->middleware->received($dialogflow);
+        
+        $botman->hears('hr', function (BotMan $bot) {
+            $extras = $bot->getMessage()->getExtras();
+            $apiReply = $extras['apiReply'];
+            $apiAction = $extras['apiAction'];
+            $apiIntent = $extras['apiIntent'];
+
+            $bot->reply($apiReply);
+        })->middleware($dialogflow);
+
+        $botman->fallback(function(Botman $bot) {
+            $bot->reply('Hmm let me think about.....');
         });
 
         $botman->listen();
