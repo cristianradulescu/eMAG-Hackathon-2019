@@ -17,7 +17,10 @@ class DefaultController extends AbstractController
 {
     private $intentCategories = [
         "hr",
-        "finance"
+        "finance",
+        "apps",
+        "teams",
+        "facility"
     ];
 
     /**
