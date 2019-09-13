@@ -21,6 +21,16 @@ class Flow
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $triggerWords;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fallbackMessage;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $flow = '{"class": "go.TreeModel","nodeDataArray": [{"key":0, "text":"How can I help you?", "loc":"0 0"}]}';
@@ -78,4 +88,45 @@ class Flow
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTriggerWords()
+    {
+        return $this->triggerWords;
+    }
+
+    /**
+     * @param mixed $triggerWords
+     * @return Flow
+     */
+    public function setTriggerWords($triggerWords)
+    {
+        $this->triggerWords = $triggerWords;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFallbackMessage()
+    {
+        return $this->fallbackMessage;
+    }
+
+    /**
+     * @param mixed $fallbackMessage
+     * @return Flow
+     */
+    public function setFallbackMessage($fallbackMessage)
+    {
+        $this->fallbackMessage = $fallbackMessage;
+
+        return $this;
+    }
+
+
+
 }

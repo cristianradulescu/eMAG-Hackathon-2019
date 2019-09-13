@@ -32,7 +32,9 @@ class FlowController extends AbstractController
      */
     public function listFlows()
     {
-        return new Response('');
+        $flows = $this->getDoctrine()->getRepository(Flow::class)->findAll();
+
+        return $this->render('flow/list.html.twig', ['flows'=>$flows]);
     }
 
     /**
@@ -44,6 +46,8 @@ class FlowController extends AbstractController
 
         $form = $this->createFormBuilder($flow)
             ->add('name', TextType::class)
+            ->add('triggerWords', TextType::class)
+            ->add('fallbackMessage', TextType::class)
             ->add('flow', HiddenType::class)
             ->add('save', SubmitType::class, ['label' => 'Save'])
             ->getForm();
@@ -55,7 +59,7 @@ class FlowController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->mindmap2Botman->generate($flow);
 
-            return $this->redirectToRoute('flows_edit', ['id'=>$flow->getId()]);
+            return $this->redirectToRoute('flows_list');
         }
 
         return $this->render('flow/edit.html.twig',['flow'=>$flow, 'form'=>$form->createView()]);
@@ -70,6 +74,8 @@ class FlowController extends AbstractController
 
         $form = $this->createFormBuilder($flow)
             ->add('name', TextType::class)
+            ->add('triggerWords', TextType::class)
+            ->add('fallbackMessage', TextType::class)
             ->add('flow', HiddenType::class)
             ->add('save', SubmitType::class, ['label' => 'Save'])
             ->getForm();
@@ -80,8 +86,23 @@ class FlowController extends AbstractController
             $this->getDoctrine()->getManager()->persist($flow);
             $this->getDoctrine()->getManager()->flush();
             $this->mindmap2Botman->generate($flow);
+
+            return $this->redirectToRoute('flows_list');
         }
 
         return $this->render('flow/edit.html.twig',['flow'=>$flow, 'form'=>$form->createView()]);
+    }
+
+    /**
+     * @Route("/flows/delete/{id}", name="flows_delete")
+     */
+    public function deleteFlow(Request $request, $id)
+    {
+        $flow = $this->getDoctrine()->getRepository(Flow::class)->find($id);
+        $this->mindmap2Botman->remove($flow);
+        $this->getDoctrine()->getManager()->remove($flow);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('flows_list');
     }
 }

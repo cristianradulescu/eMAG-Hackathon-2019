@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mind Map</title>
+    <meta name="description" content="A mind map editor, showing how subtrees can be moved, copied, deleted, and laid out." />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Copyright 1998-2019 by Northwoods Software Corporation. -->
+
+    <script src="https://unpkg.com/gojs@2.0/release/go.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+<div id="sample">
+    <a href="{{ url('flows_create') }}" > + Add</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        {% for flow in flows %}
+            <tr>
+                <td>{{ flow.name }}</td>
+                <td>
+                    <a href="{{ url('flows_edit',{"id":flow.id}) }}" >Edit</a>
+                    <a href="{{ url('flows_delete',{"id":flow.id}) }}" >Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
