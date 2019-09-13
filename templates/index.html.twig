@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+{% block javascripts %}
+    <script src="{{ ('resources/widget.js') }}"></script>
+    <script>
+        var botmanWidget = {
+            frameEndpoint: '{{ ('resources/chat.html') }}',
+            introMessage: 'Hello',
+            chatServer : '{{ path('botman') }}',
+            title: 'BotMan'
+        };
+    </script>
+{% endblock %}
+
+</body>
+
+<style>
+</style>
+</html>
