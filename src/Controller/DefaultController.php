@@ -110,7 +110,7 @@ class DefaultController extends AbstractController
         });
 
         $botman->fallback(function(Botman $bot) {
-            $bot->reply('Ohh...I don\'t get this. Try again later!');
+            $bot->reply('Ohh...I don\'t get this yet. Please try again later!');
         });
 
         $botman->listen();
