@@ -18,10 +18,10 @@ class ComputerFrozeConversation extends BaseConversation
                     
                 return;
             }
-            $matches = $this->match($answer, '.*internet.*not.*work.*');
+            $matches = $this->match($answer, '.*VPN.*not.*work.*');
             if (count($matches)) {
                 $this->answers[] = [$answer->getText()]+$matches;
-                $this->say('This is an internet bot. Your internet is fine!');
+                $this->say('The login procedure has cahnged. Please read https://www.emag.ro/guide/corporate?ref=footer_2_4#testimoniale');
                     
                 return;
             }
@@ -37,7 +37,7 @@ class ComputerFrozeConversation extends BaseConversation
             $matches = $this->match($answer, 'Yes');
             if (count($matches)) {
                 $this->answers[] = [$answer->getText()]+$matches;
-                $this->say('Please bring your computer to @daniel at room 42 floor 4');
+                $this->say($this->webkoock('http://77.81.105.198/add-ticket.php'));
                     
                 return;
             }
