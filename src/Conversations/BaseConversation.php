@@ -29,4 +29,8 @@ abstract class BaseConversation extends Conversation
 
         return array_unique($matches);
     }
+
+    public function webhook($url){
+        return file_get_contents($url.'?'.http_build_query($this->answers));
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Flow;
+use App\Service\Mindmap2Botman;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
 use BotMan\BotMan\Cache\SymfonyCache;
@@ -11,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\OnboardingConversation;
+use App\Conversations;
 
 class DefaultController extends AbstractController
 {
@@ -52,6 +54,16 @@ class DefaultController extends AbstractController
 
         $botman = BotManFactory::create($config, new SymfonyCache($adapter));
 
+        /** @var Flow[] $flows */
+        $flows = $this->getDoctrine()->getRepository(Flow::class)->findAll();
+
+        foreach ($flows as $flow){
+            $botman->hears($flow->getTriggerWords(), function($bot) use ($flow) {
+                $className = 'App\Conversations\\'.ucfirst(Mindmap2Botman::getMethodName($flow->getName())).'Conversation';
+                $bot->startConversation(new $className());
+            });
+        }
+
         $dialogflow = ApiAi::create($_ENV['DIALOGFLOW_TOKEN'])->listenForAction();
 
         $botman->middleware->received($dialogflow);
@@ -67,9 +79,6 @@ class DefaultController extends AbstractController
             })->middleware($dialogflow);
         }
 
-        $botman->fallback(function(Botman $bot) {
-            $bot->startConversation(new OnboardingConversation);
-        });
 
         $botman->listen();
         

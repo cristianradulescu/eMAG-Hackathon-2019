@@ -39,7 +39,8 @@ class Mindmap2Botman
         $map = $this->parseTree($data['nodeDataArray']);
         reset($map);
         $key = key($map);
-        $className = ucfirst($this->getMethodName($flow->getName())).'Conversation';
+        $className = ucfirst(static::getMethodName($flow->getName())).'Conversation';
+        $firstMethod = static::getMethodName($map[$key]['question']);
         $this->code .="<?php
 
 namespace App\Conversations;
@@ -55,7 +56,7 @@ class {$className} extends BaseConversation
         
         public function run()
         {
-            \$this->{$this->getMethodName($map[$key]['question'])}();
+            \$this->{$firstMethod}();
         }
 }
 ";
@@ -64,14 +65,14 @@ class {$className} extends BaseConversation
         file_put_contents(__DIR__."/../Conversations/$className.php", $this->code);
     }
 
-    public function getMethodName($question){
+    public static function getMethodName($question){
         return lcfirst(preg_replace("/[^a-zA-Z0-9]+/", "", ucwords($question)));
     }
 
     public function generateCode($aQuery, $fallbackMessage){
 
         $question = $aQuery['question'];
-        $methodName = $this->getMethodName($question);
+        $methodName = static::getMethodName($question);
 
         $this->code .= "
     public function $methodName()
@@ -89,13 +90,23 @@ class {$className} extends BaseConversation
                 ";
             } else {
                 if (count($response['responses'][0]['responses'])){
+                    $method = static::getMethodName($response['responses'][0]['question']);
                     $this->code .="
-                \$this->{$this->getMethodName($response['responses'][0]['question'])}();
+                \$this->{$method}();
                     ";
                 } else {
-                    $this->code .="
+                    preg_match_all('/\|\|([a-z]*):(.*)/',$response['responses'][0]['question'], $matches);
+                    var_dump($matches);
+                    if (count($matches[1])){
+
+                        $this->code .= "
+                \$this->say(\$this->{$matches[1][0]}('{$matches[2][0]}'));
+                    ";
+                    } else {
+                        $this->code .= "
                 \$this->say('{$response['responses'][0]['question']}');
                     ";
+                    }
                 }
             }
             $this->code .="
@@ -111,9 +122,7 @@ class {$className} extends BaseConversation
 
         foreach ($aQuery['responses'] as $response) {
             if (isset($response['responses'][0]) && count($response['responses'][0]['responses'])) {
-                //foreach ($response['responses'][0]['responses'] as $sResponse) {
-                    $this->generateCode($response['responses'][0], $fallbackMessage);
-                //}
+                $this->generateCode($response['responses'][0], $fallbackMessage);
             }
         }
 
@@ -121,6 +130,7 @@ class {$className} extends BaseConversation
 
     public function remove(Flow $flow)
     {
-
+        $className = ucfirst(static::getMethodName($flow->getName())).'Conversation';
+        unlink(__DIR__."/../Conversations/$className.php", $this->code);
     }
 }
