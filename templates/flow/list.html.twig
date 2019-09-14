@@ -10,26 +10,65 @@
     <script src="https://unpkg.com/gojs@2.0/release/go.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
+          integrity="sha256-zmfNZmXoNWBMemUOo1XUGFfc0ihGGLYdgtJS3KCr/l0=" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="sample">
-    <a href="{{ url('flows_create') }}" > + Add</a>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Action</th>
-        </tr>
-        {% for flow in flows %}
+<div id="container">
+    <div class="row">
+        <h3>Define Conversation (flow)</h3>
+    </div>
+    <div class="row">
+        <table class="table">
             <tr>
-                <td>{{ flow.name }}</td>
-                <td>
-                    <a href="{{ url('flows_edit',{"id":flow.id}) }}" >Edit</a>
-                    <a href="{{ url('flows_delete',{"id":flow.id}) }}" >Delete</a>
-                </td>
+                <th>Name</th>
+                <th>Trigger Words</th>
+                <th>Fallback message</th>
+                <th>Action</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for flow in flows %}
+                <tr>
+                    <td>{{ flow.name }}</td>
+                    <td>{{ flow.triggerWords }}</td>
+                    <td>{{ flow.fallbackMessage }}</td>
+                    <td>
+                        <a href="{{ url('flows_edit',{"id":flow.id}) }}">
+                            <button type="button" class="btn btn-secondary">Edit</button>
+                        </a>
+                        <a href="{{ url('flows_delete',{"id":flow.id}) }}">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="row" id="defineFlows">
+        <a href="{{ url('flows_create') }}">
+            <button type="button" class="btn btn-primary">Add flow</button>
+        </a>
+    </div>
 </div>
 </body>
 </html>
+
+
+<style>
+    #container {
+        margin: 40px;
+    }
+
+    #defineFlows {
+       margin-bottom: 10px;
+        float: right;
+    }
+</style>`
