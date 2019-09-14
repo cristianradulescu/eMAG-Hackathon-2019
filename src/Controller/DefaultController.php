@@ -64,6 +64,12 @@ class DefaultController extends AbstractController
             });
         }
 
+        $botman->hears('worklog', function($bot)  {
+            $bot->reply(
+                'Please find your suggested worklog <a href="'.$this->generateUrl('app_worklog_suggestworklog').'" target="_blank">here</a>'
+            );
+        });
+
         $dialogflow = ApiAi::create($_ENV['DIALOGFLOW_TOKEN'])->listenForAction();
 
         $botman->middleware->received($dialogflow);

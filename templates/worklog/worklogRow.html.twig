@@ -1,8 +1,14 @@
 {% for worklogData in worklog.items %}
     <tr class="alert {% if worklogData.duration is not null %}alert-success{% endif %}">
+        <td>
+            {% if worklogData.duration is null %}
+                <div class="remove-worklog">
+                    <i class="fas fa-trash"></i>
+                </div>
+            {% endif %}</td>
         <td>{{ worklogData.taskType }}</td>
         <td>{{ worklogData.name }}</td>
-        <td data-duration-seconds="{{ worklogData.duration }}">{{ worklogData.durationFormatted }}</td>
+        <td class="worklog-duration" data-duration-seconds="{{ worklogData.duration }}">{{ worklogData.durationFormatted }}</td>
         <td>{{ worklogData.content }}</td>
     </tr>
 {% endfor %}
