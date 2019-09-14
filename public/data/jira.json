@@ -10,7 +10,7 @@
     },
     {
       "name": "Delete deprecated API endpoint: Code review",
-      "duration": "3600",
+      "duration": "4500",
       "content": "",
       "task_type": "Code review task",
       "task_id": "ABC-2350"
