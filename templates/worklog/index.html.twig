@@ -52,10 +52,7 @@
                 {{ include('worklog/worklogRow.html.twig', { worklog: commits }) }}
 
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Total: 4h 14m</td>
-                    <td></td>
+                    <td colspan="4"><strong>Total: {{ totalLogged }}</strong></td>
                 </tr>
             </tbody>
         </table>
