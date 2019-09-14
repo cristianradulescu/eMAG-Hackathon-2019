@@ -8,7 +8,13 @@
             {% endif %}</td>
         <td>{{ worklogData.taskType }}</td>
         <td>{{ worklogData.name }}</td>
-        <td class="worklog-duration" data-duration-seconds="{{ worklogData.duration }}">{{ worklogData.durationFormatted }}</td>
+        <td class="worklog-duration" data-duration-seconds="{{ worklogData.duration }}">
+            {% if worklogData.duration is null %}
+                <input type="text" class="form-control form-control-sm">
+            {% else %}
+                {{ worklogData.durationFormatted }}
+            {% endif %}
+        </td>
         <td>{{ worklogData.content }}</td>
     </tr>
 {% endfor %}
