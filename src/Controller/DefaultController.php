@@ -79,7 +79,7 @@ class DefaultController extends AbstractController
             });
         }
 
-        $botman->hears('worklog', function($bot)  {
+        $botman->hears('worklog|where do i find my worklog|help with my worklog', function($bot)  {
             $bot->reply(
                 'Please find your suggested worklog <a href="'.$this->generateUrl('app_worklog_suggestworklog').'" target="_blank">here</a>'
             );
