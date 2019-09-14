@@ -62,6 +62,13 @@ class DefaultController extends AbstractController
             );
         });
 
+        $botman->hears('who will win?|winner|winners', function(Botman $bot)  {
+            $bot->reply(
+                'Ohh...Let me think....'
+            );
+            $bot->reply('You will win');
+        });
+
         /** @var Flow[] $flows */
         $flows = $this->getDoctrine()->getRepository(Flow::class)->findAll();
 
@@ -100,6 +107,10 @@ class DefaultController extends AbstractController
                 ->withAttachment($attachment);
 
             $botman->reply($message);
+        });
+
+        $botman->fallback(function(Botman $bot) {
+            $bot->reply('Ohh...I don\'t get this. Try again later!');
         });
 
         $botman->listen();
