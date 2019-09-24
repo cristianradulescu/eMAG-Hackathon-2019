@@ -1,0 +1,25 @@
+{
+    "contentType": "application/vnd.microsoft.card.hero",
+    "content": {
+        "title": "Hero Card",
+        "subtitle": "Subtitle",
+        "text": "Text",
+        "images": [
+            {
+                "url": "https://statics.teams.microsoft.com/evergreen-assets/apps/teams_dev_app_largeimage.png"
+            }
+        ],
+        "buttons": [
+            {
+                "type": "openUrl",
+                "title": "Button 1",
+                "value": "https://www.microsoft.com"
+            },
+            {
+                "type": "openUrl",
+                "title": "Button 2",
+                "value": "https://www.azure.com"
+            }
+        ]
+    }
+}
